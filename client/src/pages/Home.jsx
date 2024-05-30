@@ -17,6 +17,12 @@ function Home() {
 const{user,fetchPhotos}=useContext(authContext)
 console.log("allUser",user);
 
+// const userr={
+//   gname:"Akill",
+//   sname:"Arytra"
+
+// }
+
 const convertDateToWords = (dateString) => {
   const date = parseISO(dateString);
   if (!isValid(date)) {
@@ -38,9 +44,10 @@ if (!user) {
 }
 
   return (
+    
     <div>
       
-      <div>
+    {user.email}
     
         <div className="relative   text-center text-white">
             <img  src="https://i.postimg.cc/dt2XWnvN/couple-walk-through-natural-floral-arbor-ed-peers-photography.jpg" alt="Couple" className="w-full h-auto " />
@@ -102,7 +109,7 @@ if (!user) {
       
                 </Card.Body>
               </Card>
-        </div>
+        
         </div>
 
 {/* photo upload */}

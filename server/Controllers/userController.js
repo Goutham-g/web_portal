@@ -7,7 +7,7 @@ const bcrypt = require("bcrypt")
 
 // register control
 const registerUser = async (req, res) => {
-    console.log("req", req);
+    // console.log("req", req);
     const { gname,sname, venue, gMapLink,date,startTime,endTime,email,password } = req.body
     try {
 
@@ -25,7 +25,7 @@ const registerUser = async (req, res) => {
 
 
         
-        res.status(200).json({ _id: user._id,  email, gname,sname, venue, gMapLink,date,startTime,endTime})
+        res.status(200).json({user})
 
     } catch (error) {
         console.log(error);
@@ -37,7 +37,7 @@ const registerUser = async (req, res) => {
 //login control
 
 const loginUser = async (req, res) => {
-console.log(req.body);
+// console.log(req.body);
     const { email, password } = req.body
     try {
 

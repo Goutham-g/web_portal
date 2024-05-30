@@ -4,14 +4,26 @@ const Photo = require("../Models/photoModel");
 
 const uploadPhotos = async (req, res) => {
   try {
+    const { email } = req.body
     const photos = req.files.map(file => ({
      
-      url: `/uploads/${file.filename}`,
+      url: `/uploads/${file.filename}`
     
     }));
-    console.log(req.body.email);
-    await Photo.insertMany(photos);
-    res.json(photos);
+    
+    const userPhotos= await Photo.findOne({email})
+    if(userPhotos){
+      userPhotos.url.concat(photos)
+    } else{
+
+
+      userPhotos=new Photo({email,url:photos})
+    }
+     await userPhotos.save()
+    
+
+
+    res.json(userPhotos);
   } catch (error) {
     res.status(500).send('Server error');
   }

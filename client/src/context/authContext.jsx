@@ -16,7 +16,17 @@ export const AuthContextProvider =({children})=>{
 
 // state for register
     const navigate = useNavigate()
-    const [user,setUser] =useState(""); // THIS TO STORE ALL the user
+    const [user,setUser] = useState({
+      gname:'',
+      sname:'',
+      venue: '',
+      gMapLink: '',
+      date:'',
+      startTime: '',
+      endTime:'',
+        email:"",
+        password:"",
+    }); // THIS TO STORE ALL the user
     const[registerError,setRegisterError]=useState(null)
     const[isRegisterLoading,setIsRegisterLoading]=useState(false)
     
@@ -51,11 +61,11 @@ export const AuthContextProvider =({children})=>{
 
    // fetch user from local storage
 
-      useEffect(() => {
-       const user=localStorage.getItem("User")
-        setUser(user)
- 
-       }, [])
+   useEffect(() => {
+    const user=localStorage.getItem("User")
+     setUser(JSON.parse(user))
+
+    }, [])
 
 
        //update register function
@@ -84,6 +94,7 @@ export const AuthContextProvider =({children})=>{
 
         const uploadPhotos = useCallback(async (files) => {
           try {
+            console.log("Photos",files);
             const data = await uploadPhotosApi(files);
             setPhotos((prevPhotos) => [...prevPhotos, ...data]);
 
