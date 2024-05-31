@@ -14,7 +14,7 @@ import Gallery from '../components/Gallery';
 
 
 function Home() {
-const{user,fetchPhotos}=useContext(authContext)
+const{user,fetchPhotos,photos}=useContext(authContext)
 console.log("allUser",user);
 
 // const userr={
@@ -47,11 +47,11 @@ if (!user) {
     
     <div>
       
-    {user.email}
+   
     
-        <div className="relative   text-center text-white">
-            <img  src="https://i.postimg.cc/dt2XWnvN/couple-walk-through-natural-floral-arbor-ed-peers-photography.jpg" alt="Couple" className="w-full h-auto " />
-            <div className="absolute  inset-0 flex flex-col items-center justify-center space-y-4">
+        <div className="relative bg-opacity-50   text-center text-white ">
+            <img  src="https://i.postimg.cc/dt2XWnvN/couple-walk-through-natural-floral-arbor-ed-peers-photography.jpg" alt="Couple" className="w-full h-auto  " />
+            <div className="absolute  inset-0 flex flex-col items-center justify-center space-y-4 ">
               <p className='lg italic'>TOGETHER</p>
               <p className="text-xl italic">WITH THEIR PARENTS</p>
                 <h1 className="text-4xl font-bold italic">{user.gname} </h1>

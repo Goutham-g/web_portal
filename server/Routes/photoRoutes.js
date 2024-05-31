@@ -4,7 +4,7 @@ const upload = require("../multerconfig/multer");
 
 const routes = express.Router();
 
-routes.post("/", upload.array('photos',10),uploadPhotos)
+routes.post("/upload", upload.array('photos',10),uploadPhotos)
 routes.get("/:email",getPhotos)
 routes.get("/id/:id", getPhotoById);
 routes.post('/likee/:id', likePhoto);

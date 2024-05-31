@@ -92,7 +92,7 @@ export const uploadPhotosApi = async (files) => {
   
     formData.append('email', email); // Append email to form data
   
-    const response = await fetch(API_URL, {
+    const response = await fetch(`${API_URL}/upload`, {
       method: 'POST',
    
       body: formData,

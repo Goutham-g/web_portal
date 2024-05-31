@@ -3,27 +3,46 @@ const Photo = require("../Models/photoModel");
 
 
 const uploadPhotos = async (req, res) => {
-  try {
-    const { email } = req.body
-    const photos = req.files.map(file => ({
+//   try {
+//     console.log(req);
+//     const { email } = req.body
+    
+//     const photos = req.files.map(file => ({
      
-      url: `/uploads/${file.filename}`
+//       url: `/uploads/${file.filename}`
     
+//     }));
+   
+//     const userPhotos= await Photo.findOne({ email })
+    
+//     if(userPhotos){
+//       userPhotos.url  =userPhotos.url.concat(photos)
+      
+//     } else{
+
+
+//       userPhotos=new Photo({ email,url:photos })
+//     }
+//      await userPhotos.save()
+    
+
+
+//     res.json(userPhotos);
+//   } catch (error) {
+//     res.status(500).send('Server error');
+//   }
+// };
+
+
+try {
+    const { email } = req.body;
+    const photos = req.files.map(file => ({
+      url: `/uploads/${file.filename}`,
+      email: email
     }));
-    
-    const userPhotos= await Photo.findOne({email})
-    if(userPhotos){
-      userPhotos.url.concat(photos)
-    } else{
 
-
-      userPhotos=new Photo({email,url:photos})
-    }
-     await userPhotos.save()
-    
-
-
-    res.json(userPhotos);
+    await Photo.insertMany(photos);
+    res.json(photos);
   } catch (error) {
     res.status(500).send('Server error');
   }
@@ -37,7 +56,7 @@ const getPhotos = async (req, res) => {
   } catch (error) {
     res.status(500).send('Server error');
   }
-};
+}
 
 const getPhotoById = async (req, res) => {
   try {

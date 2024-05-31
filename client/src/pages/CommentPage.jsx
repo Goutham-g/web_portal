@@ -7,12 +7,13 @@ function CommentPage() {
     const { photoId } = useParams();
 
     const [commentText, setCommentText] = useState('');
+    console.log("Comment",commentText);
 console.log("seletetPc",selectedPhoto);
     useEffect(() => {
   
        fetchPhotoById(photoId)
- 
-     }, [photoId,fetchPhotoById])
+       fetchComments(photoId)
+     }, [photoId,fetchPhotoById,fetchComments])
 
      const handleAddComment = (e) => {
         e.preventDefault();
@@ -48,10 +49,10 @@ console.log("seletetPc",selectedPhoto);
       <div class="flex justify-between items-center mb-6">
         <h2 class="text-lg lg:text-2xl font-bold text-gray-900 ">Comments</h2>
     </div>
-    <form class="mb-6">
+    <form class="mb-6"        onSubmit={handleAddComment}>
         <div class="py-2 px-4 mb-4 bg-white rounded-lg rounded-t-lg border border-gray-200 ">
             <label for="comment" class="sr-only">Your comment</label>
-            <textarea id="comment" rows="6"
+            <textarea id="comment" rows="6" value={commentText} onChange={(e)=>setCommentText(e.target.value)}
                 class="px-0 w-full text-sm text-gray-900 border-0 focus:ring-0 focus:outline-none "
                 placeholder="Write a comment..." required></textarea>
         </div>
@@ -64,7 +65,7 @@ console.log("seletetPc",selectedPhoto);
     {comments && comments.length > 0 ? (
                         comments.map((comment) => (
 
-<article class="p-6 mb-3 text-base bg-white border-t border-gray-200 dark:border-gray-700 dark:bg-gray-900">
+<article class="p-3 mb-2 text-base bg-white border-t border-gray-200 dark:border-gray-700 dark:bg-gray-900">
         <footer class="flex justify-between items-center mb-2">
             <div class="flex items-center">
                 <p class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white font-semibold"><img
@@ -72,7 +73,7 @@ console.log("seletetPc",selectedPhoto);
                         src="https://flowbite.com/docs/images/people/profile-picture-3.jpg"
                         alt="Bonnie Green" />Bonnie Green</p>
                 <p class="text-sm text-gray-600 dark:text-gray-400"><time pubdate datetime="2022-03-12"
-                        title="March 12th, 2022">Mar. 12, 2022</time></p>
+                        title="March 12th, 2022">{new Date(comment.createdAt).toLocaleDateString()}</time></p>
             </div>
             <button id="dropdownComment3Button" data-dropdown-toggle="dropdownComment3"
                 class="inline-flex items-center p-2 text-sm font-medium text-center text-gray-500 dark:text-gray-40 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-50 dark:bg-gray-900 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
@@ -82,27 +83,10 @@ console.log("seletetPc",selectedPhoto);
                 </svg>
                 <span class="sr-only">Comment settings</span>
             </button>
-            {/* <!-- Dropdown menu --> */}
-            <div id="dropdownComment3"
-                class="hidden z-10 w-36 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
-                <ul class="py-1 text-sm text-gray-700 dark:text-gray-200"
-                    aria-labelledby="dropdownMenuIconHorizontalButton">
-                    <li>
-                        <a href="#"
-                            class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Edit</a>
-                    </li>
-                    <li>
-                        <a href="#"
-                            class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Remove</a>
-                    </li>
-                    <li>
-                        <a href="#"
-                            class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Report</a>
-                    </li>
-                </ul>
-            </div>
+           
+          
         </footer>
-        <p class="text-gray-500 dark:text-gray-400">{comment.texts}</p>
+        <p class="text-gray-950 ">{comment.text}</p>
         <div class="flex items-center mt-4 space-x-4">
             <button type="button"
                 class="flex items-center text-sm text-gray-500 hover:underline dark:text-gray-400 font-medium">

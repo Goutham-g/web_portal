@@ -2,7 +2,9 @@
 const Comment = require('../Models/commentModel');
 
 const getComments = async (req, res) => {
+  console.log(req.params);
   try {
+    
     const comments = await Comment.find({ photoId: req.params.photoId });
     res.json(comments);
   } catch (error) {

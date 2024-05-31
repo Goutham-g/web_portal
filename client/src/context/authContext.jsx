@@ -197,8 +197,8 @@ setLikes(data.likes)
   
         navigate('/home')
         // save user to localstorage to prevent re login
-        localStorage.setItem("User",JSON.stringify(response))
-        setUser(response)
+        localStorage.setItem("User",JSON.stringify(response.user))
+        setUser(response.user)
     },
     [registerInfo],
   )
@@ -227,8 +227,8 @@ setLikes(data.likes)
                      return setLoginError(response)
                   }
                   navigate('/home')
-                  localStorage.setItem("User",JSON.stringify(response))
-                  setUser(response)
+                  localStorage.setItem("User",JSON.stringify(response.user))
+                  setUser(response.user)
 
                   
 
